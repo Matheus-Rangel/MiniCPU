@@ -1,0 +1,23 @@
+LIBRARY ieee ;
+USE ieee.std_logic_1164.all;
+
+entity ProjetoFinal IS
+	PORT(switchs: IN std_logic_vector (15 downto 0);
+			reset, valid, op  : IN std_logic;
+			Leds : OUT std_logic_vector (16 downto 0);
+			Display0: OUT  std_logic_vector(6 downto 0);
+			Display1: OUT  std_logic_vector(6 downto 0);
+			Display2: OUT  std_logic_vector(6 downto 0);
+			Display3: OUT  std_logic_vector(6 downto 0);
+			
+END ProjetoFinal;
+
+ARCHITECTURE dataflow of ModuloDeEntrada IS
+signal si0, si1, si2, si3, si4 : std_logic;
+BEGIN
+	process(valid, reset, op, switchs) 
+		variable valor : std_logic_vector (15 downto 0);
+		begin
+			if(valid'event and valid = '1') then
+				valor := switchs;
+END dataflow;

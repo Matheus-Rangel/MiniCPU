@@ -1,0 +1,18 @@
+LIBRARY ieee ;
+USE ieee.std_logic_1164.all;
+
+entity ExtensorLogico IS
+	PORT(a, b, s0, s1, m: IN std_logic;	
+			x: out std_logic);
+END ExtensorLogico;
+
+ARCHITECTURE dataflow of ExtensorLogico IS
+signal si0, si1, si2, si3, si4 : std_logic;
+BEGIN
+	si0 <= (not m) and a;
+	si1 <= S0 and a and b;
+	si2 <= S1 and a and (not b);
+	si3 <= m and s1 and (not a) and b;
+	si4 <= m and (not s1) and (not s0) and (not a);
+	x <= si0 + si1 + si2 + si3 + si4;
+END dataflow;

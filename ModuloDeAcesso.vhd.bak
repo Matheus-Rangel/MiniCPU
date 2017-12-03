@@ -1,0 +1,18 @@
+LIBRARY ieee ;
+USE ieee.std_logic_1164.all;
+
+entity ModuloDeAcesso IS
+	PORT(switchs: IN std_logic_vector (15 downto 0);
+			reset, valid, op  : IN std_logic;
+			valorOUT : OUT std_logic_vector (15 downto 0);
+END ModuloDeAcesso;
+
+ARCHITECTURE dataflow of ModuloDeAcesso IS
+signal si0, si1, si2, si3, si4 : std_logic;
+BEGIN
+	process(valid, reset, op, switchs) 
+		variable valor : std_logic_vector (15 downto 0);
+		begin
+			if(valid'event and valid = '1') then
+				valor := switchs;
+END dataflow;
