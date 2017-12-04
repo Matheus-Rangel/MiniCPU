@@ -20,41 +20,39 @@ architecture ram_arch of ram is
     type ram_t is array (0 to 2**ADDR_WIDTH - 1) of std_logic_vector(DATA_WIDTH - 1 downto 0);
 
     signal ram_image : ram_t := (
-        0 => "1111010010010000",
-        1 => "0010011111110110",
-        2 => "1111011011011000",
-        3 => "0100000000000000",
-        4 => "1001011010000000",
-        5 => "1111000000000000",
-        6 => "0010000000000000",
-        7 => "1111001001001000",
-        8 => "0000111100000000",
-        9 => "1111011011011000",
-        10 => "0000000000000000",
-        11 => "1100011001000101",
-        12 => "1001000010000000",
-        13 => "1110001001111111",
-        14 => "1110000000000001",
-        15 => "1100000000111100",
-        16 => "1111101101101000",
-        17 => "0100000000000010",
-        18 => "1111011011011000",
-        19 => "0010000000000000",
-        20 => "1001101011000000",
-        21 => "1111101101101000",
-        22 => "1100001101010000",
-        23 => "1111011011011000",
-        24 => "0000000000000000",
-        25 => "1100011101000110",
-        26 => "1110101101111111",
-        27 => "1111000000000000",
-        28 => "0100000000000001",
-        29 => "1001000010000000",
-        30 => "1100000000111011",
-        31 => "1110010010000001",
-        32 => "1111101101101000",
-        33 => "0000000001111011",
-        others => "1100000000100011"
+        0 => "1111111111111111",--NO OPERATION
+        --algoritmo1 A=000,B=001.
+		  1 => "0110000000000000",--divide o valor de A por 2 e armazena em A
+        2 => "0110000000000000",--divide o valor de A por 2 e armazena em A
+        3 => "0101001001010000",--multiplica o valor de B por 2 e armazena em "010"
+        4 => "0101010010010000",--multiplica o valor de "010" por2 e armazena em "010"
+        5 => "0101010010010000",--multiplica o valor de "010" por2 e armazena em "010"
+        6 => "0000001010010000",--soma o valor de B com o de "010" e armazena em "010"
+        7 => "0000001010001000",--soma o valor de B com o de "010" e armazena em "B"
+        8 => "0000000001111000",--soma o valor de A e B e armazena em "111"
+        9 => "1111111111111111",--NO OPERATION
+        --algoritmo2 A=000, B=001, C=010 
+		  10 => "1110000000000001",--soma o valor de A com 1 e armazena em A
+        11 => "0101001001001000",--multiplica o valor de B por 2 e armazena em B
+        12 => "0110010010010000",--divide o valor de C por 2 e armazena em C
+        13 => "0000000001000000",--soma o valor de A com o de B e armazena em A
+        14 => "0001000010111000",--subtrai o valor de A com o de c e armazena em "111"
+        15 => "1111111111111111",--NO OPERATION
+        --algoritmo3 A=000, B=001, C=010, D = 011
+		  16 => "0010000001010000",--C = A and B
+        17 => "0011010010010000",--C = C nor C
+        18 => "0100000001011000",--D = A or B
+        19 => "0010010011010000",--C = C and D, C = A xor B.
+        20 => "0011000000000000",--A = A nor A
+        21 => "0100000001000000",--A = A or B
+        22 => "0010000010111000",--111 = A and C
+        23 => "1111111111111111",--NO OPERATION
+		  --algoritmo4 A=000, B=001
+        24 => "0101000000001000",--multiplica o valor de A por 2 e armazena em B
+        25 => "0101001001001000",--multiplica o valor de B por 2 e armazena em B
+        26 => "0000000001000000",--soma o valor de A com o de B e armazena em A
+        27 => "1111111111111111",--NO OPERATION
+        others => "1111111111111111" --NO OPERATION
     );
 begin
     process (clock)

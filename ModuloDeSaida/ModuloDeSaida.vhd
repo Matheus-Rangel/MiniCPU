@@ -1,0 +1,30 @@
+LIBRARY ieee ;
+USE ieee.std_logic_1164.all;
+entity ModuloDeSaida IS
+	PORT(
+			valor : IN std_logic_vector (15 downto 0);
+			ramOpAddrs: IN std_logic_vector(15 downto 0);
+			curAlgorithm: IN std_logic_vector(1 downto 0);
+			operating, invalidOp	: IN std_logic;
+			leds : OUT STD_LOGIC_VECTOR (16 downto 0);
+				display0, display1, display2, display3, display4, display5, display6, display7: OUT  STD_LOGIC_VECTOR(6 downto 0));
+END ModuloDeSaida;
+ARCHITECTURE dataflow of ModuloDeSaida is
+COMPONENT HexDis7 IS
+	PORT(x : IN std_logic_vector(3 downto 0);	
+			display: out std_logic_vector(6 downto 0));
+END COMPONENT;
+BEGIN
+	Di0: HexDis7 PORT MAP(valor(3)&valor(2)&valor(1)&valor(0), display0);
+	Di1: HexDis7 PORT MAP(valor(7)&valor(6)&valor(5)&valor(4), display1);
+	Di2: HexDis7 PORT MAP(valor(11)&valor(10)&valor(9)&valor(8), display2);
+	Di3: HexDis7 PORT MAP(valor(15)&valor(14)&valor(13)&valor(12), display3);
+	Di4: HexDis7 PORT MAP("00"&curAlgorithm, display4);
+	Di5: HexDis7 PORT MAP("0000", display5);
+	Di6: HexDis7 PORT MAP(ramOpAddrs(3 downto 0), display6);
+	Di7: HexDis7 PORT MAP(ramOpAddrs(7 downto 4), display7);
+	leds(0) <= operating;
+	leds(16) <= not operating;
+	leds(15) <= invalidOp;
+	leds(14 downto 1) <= "00000000000000";
+END dataflow;
